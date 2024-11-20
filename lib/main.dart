@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'config/themes/default_theme.dart';
-import 'features/home/presentation/home_page.dart';
+import 'config/themes/custome_theme.dart';
+import 'features/welcome/presentation/pages/welcome_page.dart';
+
+// import 'features/home/presentation/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: defaultTheme(),
-      home: const HomePage(),
+      // debugShowCheckedModeBanner: false,
+      // ! estas tres configuraciones aplican el cambio de tema segun el tema del dispositivo
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
+      // home: const HomePage(),
+      home: const WelcomePage(),
     );
   }
 }

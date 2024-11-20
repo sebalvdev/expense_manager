@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/add_expense/presentation/pages/add_expense_page.dart';
 import '../../features/analitics/presentation/analitics_page.dart';
-import '../../features/home/presentation/home_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
 
 
 class AppRoutes {
