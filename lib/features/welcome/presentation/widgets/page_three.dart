@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/constants.dart';
+
 class PageThree extends StatelessWidget {
   const PageThree({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: const Column(
+    return Scaffold(
+      body: content(context),
+    );
+  }
+
+  Widget content(BuildContext context) {
+    double mediaHeight = MediaQuery.of(context).size.height / 3;
+    return Center(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.star, size: 100, color: Colors.white),
-          Text(
-            'Welcome to Page Three!',
-            style: TextStyle(color: Colors.white, fontSize: 24),
+          Image.network('https://placehold.co/250x50/png'),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 50),
+            child: Image.network('https://placehold.co/${mediaHeight.toInt()}/png'),
           ),
+          ListTile(
+            title: Text('Welcome to Page Three', textAlign: TextAlign.center, style: TextStyle(fontSize: h2, height: 0)),
+            subtitle: Text('data', textAlign: TextAlign.center, style: TextStyle(fontSize: h3, height: 0)),
+          )
         ],
       ),
     );

@@ -10,4 +10,4 @@ const Color orange = Colors.orange;
 const Color green = Colors.green;
 const Color red = Colors.red;
 
-const Color primary = Colors.white;
+const Color primary = Colors.blue;

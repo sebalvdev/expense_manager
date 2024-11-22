@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../widgets/widgets.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -27,16 +28,14 @@ class _WelcomePage extends State<WelcomePage> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const NextPage()),
-      );
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     double mediaWith = MediaQuery.of(context).size.width - 50;
+
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -47,17 +46,44 @@ class _WelcomePage extends State<WelcomePage> {
         },
         children: _pages,
       ),
-      floatingActionButton: SizedBox(
-        width: mediaWith,
-        child: FloatingActionButton(
-          onPressed: _nextPage,
-          backgroundColor: Colors.blue,
-          child: Icon(
-            _currentIndex == _pages.length - 1
-                ? Icons.check // Icono para "Finish"
-                : Icons.arrow_forward, // Icono para "Next"
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Dot Indicator
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(_pages.length, (index) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: _currentIndex == index ? 12 : 8,
+                height: _currentIndex == index ? 12 : 8,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _currentIndex == index
+                      ? primary
+                      : grey,
+                ),
+              );
+            }),
           ),
-        ),
+          const SizedBox(height: 16),
+          // FloatingActionButton
+          SizedBox(
+            width: mediaWith,
+            child: FloatingActionButton(
+              onPressed: _nextPage,
+              elevation: 8,
+              child: Icon(
+                _currentIndex == _pages.length - 1
+                    ? Icons.check
+                    : Icons.arrow_forward,
+                    color: white,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
@@ -95,25 +121,6 @@ class PageContent extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class NextPage extends StatelessWidget {
-  const NextPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Next Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'You have reached the next page!',
-          style: TextStyle(fontSize: 24),
         ),
       ),
     );
